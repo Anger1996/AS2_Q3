@@ -91,7 +91,7 @@ void Lights::Display()
 	glLightfv(GL_LIGHT1, GL_SPECULAR, &_specular[_LIGHT1_]);
 	//add attenuation
 	glLightf(GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0.f);
-    glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.0001f);
+        glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.0001f);
 	glEnable(GL_LIGHT1);
 
 }
