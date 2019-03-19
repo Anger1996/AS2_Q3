@@ -16,7 +16,7 @@ void Wall::Display()
 
 	float diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	float specular[] = { 0.f, 0.f, 0.f, 1.0f };
-	float shininess = 100.0f;
+	float shininess = 128.0f;
 	float _ambient[] = { 0.5f, 0.5f, 0.5f, 0.5f };
 
 	glScalef(scale[0], scale[1], scale[2]);

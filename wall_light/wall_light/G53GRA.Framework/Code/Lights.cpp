@@ -8,17 +8,17 @@ Lights::Lights() :
 	static GLfloat ambient[] =
 	{   
 	    // LIGHT 0 
-		0.1f, 0.0f, 0.0f, 1.0f,
+		0.7f, 0.0f, 0.0f, 1.0f,
 		// LIGHT 1 
-		0.0f, 0.1f, 0.0f, 1.0f
+		0.0f, 0.0f, 0.7f, 1.0f
 	};
 
 	static GLfloat diffuse[] =
 	{
 		// LIGHT 0
-		0.9f, 0.0f, 0.0f, 1.0f,
+		1.0f, 0.0f, 0.0f, 1.0f,
 		// LIGHT 1
-		0.0f, 0.9f, 0.0f, 1.0f
+		0.0f, 0.0f, 1.0f, 1.0f
 
 	};
 
@@ -27,7 +27,7 @@ Lights::Lights() :
 		// LIGHT 0 
 		0.7f, 0.0f, 0.0f, 1.0f,
 		// LIGHT 1 
-		0.0f, 0.7f, 0.0f, 1.0f
+		0.0f, 0.0f, 0.7f, 1.0f
 	};
 
 	_ambient = ambient;
@@ -49,18 +49,19 @@ void Lights::Display()
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glDisable(GL_LIGHTING);
 
+		GLfloat color[4] = { 0, 0, 0, 1.0f };
 		// LIGHT 0
 		glPushMatrix();
-		glColor4fv(&_diffuse[_LIGHT0_]);
-		glTranslatef(-145, 0, 0);
-		glutSolidSphere(10.0f, 10, 10);
+		glColor4fv(color);
+		glTranslatef(-100, 0, 0);
+		glutSolidSphere(5.0f, 10, 10);
 		glPopMatrix();
 
 		// LIGHT 1
 		glPushMatrix();
-		glColor4fv(&_diffuse[_LIGHT1_]);
-		glTranslatef(145, 0, 0);
-		glutSolidSphere(10.0f, 10, 10);
+		glColor4fv(color);
+		glTranslatef(100, 0, 0);
+		glutSolidSphere(5.0f, 10, 10);
 
 		glPopMatrix();
 		glPopAttrib();
@@ -72,19 +73,25 @@ void Lights::Display()
 
 	/*set and enable the lights*/
 	//light1
-	GLfloat l_0_Position[4] = { -145, 0, 0, 1.0f};
+	GLfloat l_0_Position[4] = { -100, 0, 0, 1.0f};
 	glLightfv(GL_LIGHT0, GL_POSITION, l_0_Position);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, &_ambient[_LIGHT0_]);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, &_diffuse[_LIGHT0_]);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, &_specular[_LIGHT0_]);
+	//add attenuation
+	glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION ,0.f);
+	glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0001f);
 	glEnable(GL_LIGHT0);
 
 	//light2
-	GLfloat l_1_Position[4] = { 145, 0, 0, 1.0f};
+	GLfloat l_1_Position[4] = { 100, 0, 0, 1.0f};
 	glLightfv(GL_LIGHT1, GL_POSITION, l_1_Position);
 	glLightfv(GL_LIGHT1, GL_AMBIENT, &_ambient[_LIGHT1_]);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, &_diffuse[_LIGHT1_]);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, &_specular[_LIGHT1_]);
+	//add attenuation
+	glLightf(GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0.f);
+    glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.0001f);
 	glEnable(GL_LIGHT1);
 
 }
